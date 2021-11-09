@@ -1,0 +1,20 @@
+﻿@{
+    Layout = "_Layout";
+}
+@using Contentful.Core.Models
+@using contentfulPOC.Models
+@model IEnumerable<contentfulPOC.Models.Blog>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>
+        Blogs
+    </p>
+    @foreach (var blog in Model)
+    {
+        var htmlRenderer = new HtmlRenderer();
+        var html = htmlRenderer.ToHtml(blog.Body);
+        <p>Blog Title : @blog.Title</p>
+        <p>Blog Body : @Html.Raw(@html.Result)</p>
+        <img src="@blog.HeaderImage.File.Url?w=350" alt="@blog.HeaderImage.File.FileName" />
+    }
+</div>
